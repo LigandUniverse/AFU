@@ -1,10 +1,10 @@
-# VF-Unity
-Streamlined version of VirtualFlow combining both VFVS and VFLP
+# AF-Unity
+Streamlined version of AdaptiveFlow combining both AFVS and AFLP
 
 ## Prerequisites
 Please clone the repository using: 
 ```
-git clone git@github.com:VirtualFlow/VF-Unity.git
+git clone git@github.com:LigandUniverse/AFU.git
 ```
 Please ensure that the following packages are installed: 
 - [RDKit version 2021.09.5](https://www.rdkit.org/docs/Install.html)
@@ -14,14 +14,14 @@ Please ensure that the following packages are installed:
 
 
 ## File Navigator
-* `run_vf_unity.py`: Main file that initiates docking calculations. 
+* `run_af_unity.py`: Main file that initiates docking calculations. 
 * `initiate_calc.py`: File that initiates scoring, docking calculations. 
 * `lig_process.py`: Process provided ligand into 3D format compatible with docking program (used by )
 * `pose_prediction.py`: File for running pose prediction on processed ligands (used by pose_prediction). 
 * `scoring_functions.py`: File for running scoring on already docked ligands (used by initiate_calc.py). 
 * `config.txt`: Config file concisting of user definable parameters for running calculation. 
-* `/ligands/`: Directory created by VF-Unity which will contain all processed ligands in a ready-to-dock format. 
-* `/outputs/`: Directory created by VF-Unity which will contain docked ligand files. 
+* `/ligands/`: Directory created by AFU which will contain all processed ligands in a ready-to-dock format. 
+* `/outputs/`: Directory created by AFU which will contain docked ligand files. 
 
 
 
@@ -49,7 +49,7 @@ Please edit this file based on your preferance:
 # asp, chemscore, goldscore, plp, mm_gbsa_scoring, Hawkins_gbsa
 # Please note: different pose prediction/docking methods can be combined with scoring functions.
 # For example: ’qvina+nnscore2’.
-# For supported choices/combinations please see the VirtualFlow homepage.
+# For supported choices/combinations please see the AdaptiveFlow homepage.
 
 program_choice=qvina+nnscore2
 
@@ -85,7 +85,7 @@ receptor=./config/5wiu_test.pdbqt
 ```
 To execute the program, please run: 
 ```
-python3 run_vf_unity.py
+python3 run_af_unity.py
 ```
 We note: 
 1. The processed ligands will be located within the newly created ligands directory.
@@ -134,7 +134,7 @@ We note:
     
 ## Quick Start (Using a python function call)
 ```
-from run_vf_unity import main 
+from run_af_unity import main 
 
 program_choice   = 'qvina'
 scoring_function = 'nnscore2' 
@@ -170,7 +170,7 @@ Index,Smiles
 The molecules can be run simply using out python function call: 
 ```
 import os 
-from run_vf_unity import main 
+from run_af_unity import main 
 
 program_choice   = 'qvina'
 scoring_function = '' 
@@ -201,14 +201,14 @@ The corresponding index (column 1) of a molecule in the `molecules.txt` file wil
 ### Using AutoDock-GPU/CPU
 Please compile the code using instructions from: [https://github.com/ccsb-scripps/AutoDock-GPU](https://github.com/ccsb-scripps/AutoDock-GPU). 
 After successfull compilation, within the bin directory, an executable will be made (example name: `autodock_gpu_1wi`). Then, the code is ready to run. 
-We provide an example inside `./executables/vf_gpu_example.zip`. Inside the directory, a prepared protein-ligand pair is provided and the code can be run 
+We provide an example inside `./executables/af_gpu_example.zip`. Inside the directory, a prepared protein-ligand pair is provided and the code can be run 
 using: `./autodock_gpu_1wi --ffile 1stp_protein.maps.fld --lfile ./1stp_ligand.pdbqt`
 
 
 ### Using EquiBind
 Please download the code using instructions from: [https://github.com/HannesStark/EquiBind](https://github.com/HannesStark/EquiBind). 
 Please create a conda enviroment per the instructions of the EquiBind repository. 
-Copy paste all files inside the working directory of VF-Unity. 
+Copy paste all files inside the working directory of AFU. 
 
 
 ### Using rDock
@@ -272,7 +272,7 @@ Please paste the executable from [https://galaxy.seoklab.org/files/by2hsnvxjf/so
 Note a data directory (name 'data') is required for successful runs. 
 
 ### LightDock
-We suggest downloading LightDock from: [https://github.com/lightdock/lightdock](https://github.com/lightdock/lightdock). For this, within the current working directory (VF-Unity), please run: 
+We suggest downloading LightDock from: [https://github.com/lightdock/lightdock](https://github.com/lightdock/lightdock). For this, within the current working directory (AFU), please run: 
 ```
 git clone https://github.com/lightdock/lightdock.git
 virtualenv venv
@@ -303,10 +303,10 @@ An executable named `gold_auto` should be placed in the `/executables` directory
 
 When specifying a GOLD fitness function with which to re-score docking results, a dynamically loadable 
 shared object library must be available in the top-level directory of this repository and named correspondingly 
-with the parameter defined in the VFU configuration, i.e., one of `plp`, `asp`, `chemscore`, `goldscore`.
+with the parameter defined in the AFU configuration, i.e., one of `plp`, `asp`, `chemscore`, `goldscore`.
 
 ### Contributing
-If you are interested in contributing to VirtualFlow, whether it is to report a bug or to extend VirtualFlow with your own code, please see the file [CONTRIBUTING.md](CONTRIBUTING.md) and the file [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+If you are interested in contributing to AdaptiveFlow, whether it is to report a bug or to extend AdaptiveFlow with your own code, please see the file [CONTRIBUTING.md](CONTRIBUTING.md) and the file [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
 
 
@@ -315,4 +315,4 @@ The project ist distributed under the GNU GPL v2.0. Please see the file [LICENSE
 
 
 ### Citation
-Gorgulla, Christoph, et al. "VirtualFlow 2.0-The Next Generation Drug Discovery Platform Enabling Adaptive Screens of 69 Billion Molecules." bioRxiv (2023): 2023-04.
+Gorgulla, Christoph, et al. "AI-Enhanced Adaptive Virtual Screening Platform Enabling Exploration of 69 Billion Molecules Discovers Structurally Validated FSP1 Inhibitors." bioRxiv (2023): 2023-04.

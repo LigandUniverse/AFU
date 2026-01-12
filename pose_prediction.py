@@ -91,7 +91,7 @@ def run_autodock_gpu_docking(receptor, smi, program_choice):
         Note: The receptor file needs to be in .maps.fld format for AutoDock-GPU. The ligands will be converted to pdbqt format using the 'process_ligand' function from the 'lig_process' module.
     '''
 
-    print('Note: For use of vina gpu, the receptor needs to be prepared in a specific way. Have a look at the examples provided in https://github.com/ccsb-scripps/AutoDock-GPU & the example dir we provided within executables/vf_gpu_example.zip')
+    print('Note: For use of vina gpu, the receptor needs to be prepared in a specific way. Have a look at the examples provided in https://github.com/ccsb-scripps/AutoDock-GPU & the example dir we provided within executables/af_gpu_example.zip')
     command = []
     
     # receptor needs to be in mol2 format: 

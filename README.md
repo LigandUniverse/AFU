@@ -1,10 +1,10 @@
-# VF-Unity
-Streamlined version of VirtualFlow combining both VFVS and VFLP
+# VF Unity
+Streamlined version of AdaptiveFlow combining both AFVS and AFLP
 
 ## Prerequisites
 Please clone the repository using: 
 ```
-git clone git@github.com:VirtualFlow/VF-Unity.git
+git clone git@github.com:QuantumAI4Bio/AdaptiveFlow-Unity.git
 ```
 Please ensure that the following packages are installed: 
 - [RDKit version 2021.09.5](https://www.rdkit.org/docs/Install.html)
@@ -15,19 +15,19 @@ Please ensure that the following packages are installed:
 
 ## File Navigator
 * `run_vf_unity.py`: Main file that initiates docking calculations. 
-* `initiate_calc.py`: File that initiates scoring, docking calculations. 
+* `initiate_calc.py`: File that initiates scoring and docking calculations. 
 * `lig_process.py`: Process provided ligand into 3D format compatible with docking program (used by )
 * `pose_prediction.py`: File for running pose prediction on processed ligands (used by pose_prediction). 
 * `scoring_functions.py`: File for running scoring on already docked ligands (used by initiate_calc.py). 
-* `config.txt`: Config file concisting of user definable parameters for running calculation. 
-* `/ligands/`: Directory created by VF-Unity which will contain all processed ligands in a ready-to-dock format. 
-* `/outputs/`: Directory created by VF-Unity which will contain docked ligand files. 
+* `config.txt`: Config file consisting of user-definable parameters for running the calculation. 
+* `/ligands/`: Directory created by VF Unity, which will contain all processed ligands in a ready-to-dock format. 
+* `/outputs/`: Directory created by VF Unity, which will contain docked ligand files. 
 
 
 
 ## Quick Start (Using a config.txt file)
 We will be running QuickVina on a processed protein located in the config directory (`5wiu_test.pdbqt`). We provide a config.txt file which contains all parmeters for this simple run. 
-Please edit this file based on your preferance: 
+Please edit this file based on your preference: 
 ```
 # The choice of the docking method
 # Possible choices:
@@ -49,7 +49,7 @@ Please edit this file based on your preferance:
 # asp, chemscore, goldscore, plp, mm_gbsa_scoring, Hawkins_gbsa
 # Please note: different pose prediction/docking methods can be combined with scoring functions.
 # For example: ’qvina+nnscore2’.
-# For supported choices/combinations please see the VirtualFlow homepage.
+# For supported choices/combinations, please see the manuscript or the homepage.
 
 program_choice=qvina+nnscore2
 
@@ -90,7 +90,7 @@ python3 run_vf_unity.py
 We note: 
 1. The processed ligands will be located within the newly created ligands directory.
 2. The docked output from running QuickVina will be located in the newly created outputs directory.
-3. The default behaviour is for the program (QuickVina) is to make use of all available CPUs. 
+3. The default behaviour of the program (QuickVina) is to make use of all available CPUs. 
 4. A summary csv file `docking_output.csv` is created (for running QuickVina): 
     ```
     Ligand File,Docking Values,Docking Pose
@@ -132,7 +132,7 @@ We note:
     ./outputs/pose_14.pdbqt,Kd = 162.12 fM;Kd = 726.22 fM;Kd = 10.38 fM;Kd = 432.15 fM;Kd = 0.06 fM;Kd = 9.24 pM;Kd = 3.07 pM;Kd = 23.07 nM;Kd = 7.97 pM
     ```
     
-## Quick Start (Using a python function call)
+## Quick Start (Using a Python function call)
 ```
 from run_vf_unity import main 
 
@@ -155,9 +155,9 @@ pose_pred_out, re_scored_values = main(program_choice, scoring_function, center_
 We note: 
 1. The processed ligands will be located within the newly created ligands directory.
 2. The docked output from running QuickVina will be located in the newly created outputs directory.
-3. The default behaviour is for the program (QuickVina) is to make use of all available CPUs. 
-4. The output from running th QuickVina calculation will be stored in the dictionary pose_pred_out.
-5. The output from running th QuickVina NNScore2.0 will be stored in the dictionary re_scored_values.
+3. The default behaviour of the program (QuickVina) is to make use of all available CPUs. 
+4. The output from running the QuickVina calculation will be stored in the dictionary pose_pred_out.
+5. The output from running the QuickVina NNScore2.0 will be stored in the dictionary re_scored_values.
 6. No output csv files are created in this case. 
 
 ## Running calculations for multiple molecules: 
@@ -200,24 +200,24 @@ The corresponding index (column 1) of a molecule in the `molecules.txt` file wil
 ## Special Considerations
 ### Using AutoDock-GPU/CPU
 Please compile the code using instructions from: [https://github.com/ccsb-scripps/AutoDock-GPU](https://github.com/ccsb-scripps/AutoDock-GPU). 
-After successfull compilation, within the bin directory, an executable will be made (example name: `autodock_gpu_1wi`). Then, the code is ready to run. 
+After successful compilation, within the bin directory, an executable will be made (example name: `autodock_gpu_1wi`). Then, the code is ready to run. 
 We provide an example inside `./executables/vf_gpu_example.zip`. Inside the directory, a prepared protein-ligand pair is provided and the code can be run 
 using: `./autodock_gpu_1wi --ffile 1stp_protein.maps.fld --lfile ./1stp_ligand.pdbqt`
 
 
 ### Using EquiBind
-Please download the code using instructions from: [https://github.com/HannesStark/EquiBind](https://github.com/HannesStark/EquiBind). 
-Please create a conda enviroment per the instructions of the EquiBind repository. 
-Copy paste all files inside the working directory of VF-Unity. 
+Please download the code using the instructions from: [https://github.com/HannesStark/EquiBind](https://github.com/HannesStark/EquiBind). 
+Please create a conda environment per the instructions of the EquiBind repository. 
+Copy-paste all files inside the working directory of VF Unity. 
 
 
 ### Using rDock
-Please compile the code using the instruction provided in: [https://rdock.sourceforge.net/installation/](https://rdock.sourceforge.net/installation/). 
-We installed rDock using anacond (with `conda install -c bioconda rdock`)
+Please compile the code using the instructions provided in: [https://rdock.sourceforge.net/installation/](https://rdock.sourceforge.net/installation/). 
+We installed rDock using Anaconda (with `conda install -c bioconda rdock`)
 
 ### Using MM-GBSA
-Please install AmberTools: [https://ambermd.org/GetAmber.php#ambertools](https://ambermd.org/GetAmber.php#ambertools). We managed performed the download using conda. 
-Additionally, please note: the variable `chimera_path` should be updated to location of the Chimera on your system. Chimera can be downloaded: [https://www.cgl.ucsf.edu/chimera/download.html](https://www.cgl.ucsf.edu/chimera/download.html).
+Please install AmberTools: [https://ambermd.org/GetAmber.php#ambertools](https://ambermd.org/GetAmber.php#ambertools). We managed to perform the download using conda. 
+Additionally, please note: the variable `chimera_path` should be updated to the location of the Chimera on your system. Chimera can be downloaded: [https://www.cgl.ucsf.edu/chimera/download.html](https://www.cgl.ucsf.edu/chimera/download.html).
 
 
 ### AutoDockZN
@@ -284,8 +284,8 @@ pip install -e .
 ### MpSDockZN
 Please add the executable (of name `MpSDock`) in executables directory.
 Please install AmberTools: [https://ambermd.org/GetAmber.php#ambertools](https://ambermd.org/GetAmber.php#ambertools).
-We managed performed the download using conda. 
-Please note: the variable `chimera_path` should be updated to location of the Chimera on your system. Chimera can be downloaded: [https://www.cgl.ucsf.edu/chimera/download.html](https://www.cgl.ucsf.edu/chimera/download.html).
+We managed to perform the download using conda. 
+Please note: the variable `chimera_path` should be updated to the location of the Chimera on your system. Chimera can be downloaded: [https://www.cgl.ucsf.edu/chimera/download.html](https://www.cgl.ucsf.edu/chimera/download.html).
 A working dock6 download (with a valid licence) is required. The variable `dock6_path` should be updated to location of the Chimera on your system.
 A `box.in` input file is required for the program. Please specify the path in variable `box_in_file`.
 A `grid.in` input file is required for the program. Please specify the path in variable `grid_in_file`.
@@ -306,13 +306,13 @@ shared object library must be available in the top-level directory of this repos
 with the parameter defined in the VFU configuration, i.e., one of `plp`, `asp`, `chemscore`, `goldscore`.
 
 ### Contributing
-If you are interested in contributing to VirtualFlow, whether it is to report a bug or to extend VirtualFlow with your own code, please see the file [CONTRIBUTING.md](CONTRIBUTING.md) and the file [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+If you are interested in contributing to AdaptiveFlow, whether it is to report a bug or to extend AdaptiveFlow with your own code, please see the file [CONTRIBUTING.md](CONTRIBUTING.md) and the file [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
 
 
 ### License
-The project ist distributed under the GNU GPL v2.0. Please see the file [LICENSE](LICENSE) for more details. 
+The project is distributed under the GNU GPL v2.0. Please see the file [LICENSE](LICENSE) for more details. 
 
 
 ### Citation
-Gorgulla, Christoph, et al. "VirtualFlow 2.0-The Next Generation Drug Discovery Platform Enabling Adaptive Screens of 69 Billion Molecules." bioRxiv (2023): 2023-04.
+Gorgulla, Christoph, et al. "AI-Enhanced Adaptive Virtual Screening Platform Enabling Exploration of 69 Billion Molecules Discovers Structurally Validated FSP1 Inhibitors." bioRxiv (2025): 2025-8-14.
